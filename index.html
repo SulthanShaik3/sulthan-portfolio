@@ -53,7 +53,15 @@
             </p>
 
             <div class="buttons">
-                <a href="#projects" class="btn">View Projects</a>
+                <a href="Sulthan%20Shaik%20_Endpoint%20Management%20Administrator%20_%20Resume.pdf"
+                    class="btn resume-download"
+                    download="Sulthan-Shaik-Endpoint-Management-Administrator-Resume.pdf">
+                    <span class="resume-download-mark" aria-hidden="true">
+                        <i class="fa-solid fa-file-arrow-down resume-download-icon"></i>
+                    </span>
+                    <span>Download Resume</span>
+                </a>
+                <a href="#projects" class="btn2">View Projects</a>
                 <a href="#contact" class="btn2">Contact Me</a>
             </div>
         </div>
@@ -193,7 +201,10 @@
                 </p>
             </div>
 
-            <div class            Managed device compliance policies through Microsoft Intune,
+            <div class="project-card">
+                <h3>Device Compliance &amp; Security</h3>
+                <p>
+                    Managed device compliance policies through Microsoft Intune,
                     investigated non-compliant devices, identified root causes,
                     and performed remediation activities to maintain security
                     and regulatory compliance.
@@ -204,35 +215,31 @@
 
     </section>
     <section id="contact" class="contact-section">
-
-    <p class="thank-note">
-        Thank you for taking the time to explore my portfolio.
-        I appreciate your visit and look forward to connecting with you.
-    <h2 class="connect-title">
-        Let's Connect
-    <div class="contact-icons">
-
-        <a href="mailto:sulthansr777@gmail.com">
-            <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://linkedin.com/in/sulthan-shaik-485190414" target="_blank">
-            <i class="fab fa-linkedin"></i>
-        </a>
-
-        <a href="https://github.com/YOUR_GITHUB" target="_blank">
-            <i class="fab fa-github"></i>
-        </a>
-
-    </div>
-    </h2>
-    </p>
-</section>
-        </span>
-
-    </h2>
-
-</section>
+        <p class="thank-note">
+            Thank you for exploring my portfolio. I’m passionate about creating
+            secure, reliable digital workplace experiences and would welcome the
+            opportunity to bring my endpoint management experience to your team.
+        </p>
+        <div class="connect-row">
+            <h2 class="connect-title">Let's Connect</h2>
+            <div class="contact-icons">
+                <a href="mailto:sulthansr777@gmail.com" aria-label="Email Sulthan">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </a>
+                <a href="https://linkedin.com/in/sulthan-shaik-485190414"
+                    target="_blank" rel="noopener noreferrer" aria-label="Sulthan on LinkedIn">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <button class="phone-toggle" type="button" aria-label="Show phone number"
+                    aria-expanded="false" aria-controls="phoneNumber">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                </button>
+                <span class="phone-number" id="phoneNumber" role="status" aria-live="polite" hidden>
+                    <a href="tel:+919963160782">+91 9963160782</a>
+                </span>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <!-- Footer -->
@@ -240,7 +247,18 @@
         <p>© 2026 Sulthan Shaik | Portfolio Website</p>
     </footer>
 
+    <div class="resume-toast" id="resumeToast" role="status" aria-live="polite" aria-atomic="true" hidden>
+        <span class="resume-toast-icon" aria-hidden="true">
+            <i class="fa-solid fa-check"></i>
+        </span>
+        <div class="resume-toast-copy">
+            <strong>Thanks for reviewing my resume!</strong>
+            <p>I’d welcome the opportunity to discuss how my endpoint management experience can support your team.</p>
+        </div>
+        <button class="resume-toast-close" type="button" aria-label="Dismiss thank-you message">&times;</button>
+    </div>
 
+    <script src="script.js" defer></script>
 </body>
 
 </html>
