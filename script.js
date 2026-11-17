@@ -1,96 +1,80 @@
-const txt = [
-"Digital Workplace Support Engineer",
-"SCCM Engineer",
-"Intune Administrator",
-"Autopilot Specialist",
+const titles = [
+    "Digital Workplace Support Engineer",
+    "SCCM Engineer",
+    "Intune Administrator",
+    "Autopilot Specialist",
 ];
 
-let i = 0;
-let j = 0;
+const typingTarget = document.getElementById("typing");
 
-function typing() {
+if (typingTarget) {
+    let titleIndex = 0;
+    let characterIndex = 0;
 
-if(j < txt[i].length){
+    function typeTitle() {
+        const title = titles[titleIndex];
 
-document.getElementById("typing").innerHTML += txt[i].charAt(j);
+        if (characterIndex < title.length) {
+            typingTarget.textContent += title.charAt(characterIndex);
+            characterIndex += 1;
+            window.setTimeout(typeTitle, 100);
+            return;
+        }
 
-j++;
+        window.setTimeout(() => {
+            typingTarget.textContent = "";
+            characterIndex = 0;
+            titleIndex = (titleIndex + 1) % titles.length;
+            typeTitle();
+        }, 1500);
+    }
 
-setTimeout(typing,100);
-
-}
-else{
-
-setTimeout(() => {
-
-document.getElementById("typing").innerHTML = "";
-j = 0;
-i = (i + 1) % txt.length;
-
-typing();
-
-},1500);
-
-}
-
+    typeTitle();
 }
 
-typing();
-const dock = document.querySelector('.social-dock');
+const phoneToggle = document.querySelector(".phone-toggle");
+const phoneNumber = document.getElementById("phoneNumber");
 
-const observer = new IntersectionObserver(entries => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting){
-
-dock.classList.add("showDock");
-
+if (phoneToggle && phoneNumber) {
+    phoneToggle.addEventListener("click", () => {
+        const showNumber = phoneToggle.getAttribute("aria-expanded") !== "true";
+        phoneToggle.setAttribute("aria-expanded", String(showNumber));
+        phoneToggle.setAttribute("aria-label", showNumber ? "Hide phone number" : "Show phone number");
+        phoneNumber.hidden = !showNumber;
+    });
 }
 
-});
+const resumeButton = document.querySelector(".resume-download");
+const resumeToast = document.getElementById("resumeToast");
+const toastCloseButton = document.querySelector(".resume-toast-close");
+let toastHideTimer;
+let toastRemoveTimer;
+let toastAnimationFrame;
 
-});
-
-observer.observe(
-document.querySelector("#contact")
-);
-document.getElementById("contactBtn").addEventListener("click", function(e){
-
-e.preventDefault();
-
-document
-.getElementById("contact")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-document
-.querySelector(".social-dock")
-.classList.add("show");
-
-});
-const contactSection =
-document.querySelector("#contact");
-
-const icons =
-document.querySelectorAll(".contact-icon");
-
-const observer =
-new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-icons.forEach(icon=>{
-icon.classList.add("show");
-});
-
+function hideResumeToast() {
+    window.clearTimeout(toastHideTimer);
+    window.cancelAnimationFrame(toastAnimationFrame);
+    resumeToast.classList.remove("is-visible");
+    window.clearTimeout(toastRemoveTimer);
+    toastRemoveTimer = window.setTimeout(() => {
+        if (!resumeToast.classList.contains("is-visible")) {
+            resumeToast.hidden = true;
+        }
+    }, 350);
 }
 
-});
+if (resumeButton && resumeToast && toastCloseButton) {
+    resumeButton.addEventListener("click", () => {
+        window.clearTimeout(toastHideTimer);
+        window.clearTimeout(toastRemoveTimer);
+        window.cancelAnimationFrame(toastAnimationFrame);
+        resumeToast.hidden = false;
+        resumeToast.classList.remove("is-visible");
+        toastAnimationFrame = window.requestAnimationFrame(() => {
+            resumeToast.classList.add("is-visible");
+        });
+        toastHideTimer = window.setTimeout(hideResumeToast, 7000);
+    });
 
-});
-
-observer.observe(contactSection);
+    toastCloseButton.addEventListener("click", hideResumeToast);
+}
